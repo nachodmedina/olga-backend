@@ -1,10 +1,16 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength, Min, MinLength } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateUserDto {
     @IsNotEmpty()
     @IsString()
-    name: string;
+    userName: string;
+
+    @IsString()
+    @MinLength(8)
+    @MaxLength(32)
+    password: string;
+
 }
 
 @Entity({ name: 'users' })
@@ -13,5 +19,8 @@ export class User {
     id: number;
 
     @Column()
-    name: string;
+    userName: string;
+
+    @Column()
+    password: string;
 }
